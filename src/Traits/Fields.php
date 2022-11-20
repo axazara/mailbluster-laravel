@@ -4,10 +4,6 @@ namespace AxaZara\MailBluster\Traits;
 
 trait Fields
 {
-    private ?string $apiKey;
-
-    private ?string $apiUrl;
-
     private string $queue;
 
     private array $body = [];
@@ -53,6 +49,6 @@ trait Fields
          $this->endpoint = '/fields/'.$id;
          $this->method = 'DELETE';
 
-         return (bool) $this->makeRequest();
+         return $this->makeRequest();
      }
 }

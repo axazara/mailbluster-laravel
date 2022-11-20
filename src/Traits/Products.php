@@ -4,10 +4,6 @@ namespace AxaZara\MailBluster\Traits;
 
 trait Products
 {
-    private ?string $apiKey;
-
-    private ?string $apiUrl;
-
     private string $queue;
 
     private array $body = [];
@@ -33,7 +29,7 @@ trait Products
         $this->endpoint = '/products';
         $this->method = 'GET';
 
-        return ($this->makeRequest()) ? $this->response->products : null;
+        return ($this->makeRequest()) ? $this->response : null;
     }
 
     public function getProduct(string $id): ?object
