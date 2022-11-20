@@ -4,10 +4,6 @@ namespace AxaZara\MailBluster\Traits;
 
 trait Leads
 {
-    private ?string $apiKey;
-
-    private ?string $apiUrl;
-
     private string $queue;
 
     private array $body = [];
@@ -99,6 +95,6 @@ trait Leads
         $this->method = 'DELETE';
         $this->endpoint = '/leads/'.md5($leadEmail);
 
-        return (bool) $this->makeRequest();
+        return $this->makeRequest();
     }
 }

@@ -10,10 +10,6 @@ use Illuminate\Support\Facades\Log;
 
 trait Request
 {
-    private ?string $apiKey;
-
-    private ?string $apiUrl;
-
     private string $queue;
 
     private array $body = [];
@@ -57,12 +53,22 @@ trait Request
 
             $this->response = (object) $response->json();
 
-            return (bool) $response->successful();
+            if ($response->failed()) {
+                $this->lastError = $response;
+                Log::error('MailBluster Error :: '.$this->lastError.' URL :: '.$this->payload->url.' Request Body :: '.json_encode($this->payload->body, JSON_THROW_ON_ERROR));
+
+                return false;
+            }
+
+            return true;
         } catch (Exception $e) {
             Log::error('MailBluster :: Exception :'.$e->getMessage());
+
             if (config('app.debug')) {
                 throw new RequestError($e->getMessage());
             }
+
+            $this->lastError = $e->getMessage();
 
             return false;
         }
