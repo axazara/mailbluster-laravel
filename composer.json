@@ -1,0 +1,75 @@
+{
+    "name": "axazara/mailbluster-laravel",
+    "description": "This is the official Laravel client library for the MailBluster ( Axa Zara Mail Service) API, which allows you to send emails.",
+    "keywords": [
+        "AxaZara",
+        "laravel",
+        "mailbluster",
+        "mailbluster-laravel"
+    ],
+    "homepage": "https://github.com/axazara/mailify-laravel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Elias Elimah",
+            "email": "elias.elimah@axazara.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "illuminate/contracts": "^9.0"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest"
+        ,
+        "insolita/unused-scanner": "^2.4",
+        "laravel/pint": "^1.0",
+        "nunomaduro/collision": "^6.0",
+        "nunomaduro/larastan": "^2.0.1",
+        "orchestra/testbench": "^7.0",
+        "pestphp/pest": "^1.21",
+        "pestphp/pest-plugin-laravel": "^1.1",
+        "phpstan/extension-installer": "^1.1",
+        "phpstan/phpstan-deprecation-rules": "^1.0",
+        "phpstan/phpstan-phpunit": "^1.0",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "AxaZara\\MailBluster\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AxaZara\\MailBluster\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
+        "analyse": "vendor/bin/phpstan analyse",
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage",
+        "format": "vendor/bin/pint",
+        "unused": "vendor/bin/unused_scanner unused-scanner.php"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "AxaZara\\MailBluster\\MailBlusterServiceProvider"
+            ],
+            "aliases": {
+                "MailBluster": "AxaZara\\MailBluster\\Facades\\MailBluster"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
