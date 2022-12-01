@@ -9,7 +9,7 @@
 This is simple laravel package to interact with Mailbluster API.
 
 ```php
-Mailify::createLead('lead@exemple.com') // To create a lead
+MailBluster::createLead('lead@exemple.com') // To create a lead
 ```
 
 ## Installation

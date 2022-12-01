@@ -5,7 +5,7 @@ To learn more about the API, visit [MailBluster API - Leads](https://app.mailblu
 `createLead` method is used to create a lead in MailBluster.
 
 ```php
-Mailify::createLead(string $email, bool $subscribed = true, array $options = []
+MailBluster::createLead(string $email, bool $subscribed = true, array $options = []
 ```
 
 - `$email`- Email address of the lead
@@ -31,7 +31,7 @@ If request is successful, it returns object with lead details, otherwise it retu
 'readLead' method is used to read a lead from MailBluster.
 
 ```php
-Mailify::readLead(string $email)
+MailBluster::readLead(string $email)
 ```
 **$email** - Email address of the lead
 If request is successful, it returns object with lead details, otherwise it return `null` and you can get the error message by calling `getLastError()` method.
@@ -41,7 +41,7 @@ If request is successful, it returns object with lead details, otherwise it retu
 `updateLead` method is used to update a lead in MailBluster.
 
 ```php
-Mailify::updateLead(string $email, array $options = [])
+MailBluster::updateLead(string $email, array $options = [])
 ```
 - `$email` - Email address of the lead
 - `$options` - Array of additional options to pass to the API
@@ -63,7 +63,7 @@ If request is successful, it returns object with lead details, otherwise it retu
 `deleteLead` method is used to delete a lead from MailBluster.
 
 ```php
-Mailify::deleteLead(string $email)
+MailBluster::deleteLead(string $email)
 ```
 
 - `$email` - Email address of the lead
@@ -73,9 +73,9 @@ If request is successful, it returns `true`, otherwise it return `false` and you
 ## Example of usage
 
 ```php
-use Axazara\MailblusterLaravel\Facades\Mailify;
+use Axazara\MailblusterLaravel\Facades\MailBluster;
 
-$lead = Mailify::createLead('jack@example.com', true, [
+$lead = MailBluster::createLead('jack@example.com', true, [
     'firstName' => 'Jack',
     'lastName' => 'Smith',
     'timezone' => 'America/New_York',
@@ -93,7 +93,7 @@ if ($lead) {
     $lead->tags; // Array of tags of the lead
     
 } else {
-    $error = Mailify::getLastError();
+    $error = MailBluster::getLastError();
 }
 ```
 
