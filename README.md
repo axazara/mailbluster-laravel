@@ -41,8 +41,8 @@ To use the MailBluster API, you need to set the `MAILBLUSTER_API_KEY`  environme
 ```dotenv
 MAILBLUSTER_API_KEY=MAILBLUSTER_API_KEY_HERE
 ```
-- `MAILIFY_API_URL` you can get this from your MailBluster API  doc.
-- `MAILBLUSTER_API_KEY` you can get this from your MailBluster dashboard.
+- `MAILBLUSTER_API_URL` you can get this from MailBluster API  doc.
+- `MAILBLUSTER_API_KEY` you can get this from your MailBluster account dashboard.
 
 > **IMPORTANT**
 > - Save your API key as an environment variable in your `.env` file. Do not hardcode it in your code.
