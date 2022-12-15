@@ -64,6 +64,12 @@ Read products docs [docs](docs/Products.md)
 ## Contribution
 You can contribute to this package by forking the repository and submitting a pull request to the `dev-main` branch.
 
+## Local Development
+To avoid error in local development or testing environment you can set the `MAILBLUSTER_API_URL` environment variable to `test` in your `.env` file, this will prevent package to send email to MailBluster API.
+⚠️Be sure to set the `MAILBLUSTER_API_URL` environment variable to the correct value when deploying to production.
+
+
+
 ## Credits
 - [Axa Zara](https://axazara.com)
 - [Elias Elimah](https://gitlab.com/EliasElimah)
