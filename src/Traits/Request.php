@@ -22,6 +22,12 @@ trait Request
 
     private function makeRequest(): bool
     {
+        if ($this->apiUrl === 'test') {
+            Log::error('MailBluster :: You are using the test mode, no request has made to MailBluster API, please check your config file.');
+
+            return true;
+        }
+
         $this->validate();
 
         $payload = [
@@ -54,7 +60,7 @@ trait Request
             $this->response = (object) $response->json();
 
             if ($response->failed()) {
-                $this->lastError = $response;
+                $this->lastError = $response->body() ?? 'Unknown error';
                 Log::error('MailBluster Error :: '.$this->lastError.' URL :: '.$this->payload->url.' Request Body :: '.json_encode($this->payload->body, JSON_THROW_ON_ERROR));
 
                 return false;
@@ -63,14 +69,7 @@ trait Request
             return true;
         } catch (Exception $e) {
             Log::error('MailBluster :: Exception :'.$e->getMessage());
-
-            if (config('app.debug')) {
-                throw new RequestError($e->getMessage());
-            }
-
-            $this->lastError = $e->getMessage();
-
-            return false;
+            throw new RequestError($e->getMessage());
         }
     }
 }

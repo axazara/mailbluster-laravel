@@ -23,5 +23,10 @@ class MailBlusterServiceProvider extends ServiceProvider
                 __DIR__.'/../config/mailbluster-laravel.php' => config_path('mailbluster.php'),
             ], 'config');
         }
+
+        $this->app->booting(function () {
+            $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+            $loader->alias('MailBluster', Facades\MailBluster::class);
+        });
     }
 }

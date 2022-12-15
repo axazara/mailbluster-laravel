@@ -4,7 +4,7 @@ To learn more about the API, visit [MailBluster API - Products](https://app.mail
 ## Get all products
 
 ```php
-Mailify::getProducts();
+MailBluster::getProducts();
 ```
 
 If request is successful, this method return object containing `products` property which is an array of products and `meta` property which is an object containing pagination information.
@@ -13,7 +13,7 @@ Otherwise, it return `null` and you can get the error message by calling `getLas
 ## Get a product
 
 ```php
-Mailify::getProduct(string $id);
+MailBluster::getProduct(string $id);
 ```
 
 - `$id` - ID of the product
@@ -24,7 +24,7 @@ Otherwise, it returns `null` and you can get the error message by calling `getLa
 ## Create a product
 
 ```php
-Mailify::createProduct(string $id, string $name);
+MailBluster::createProduct(string $id, string $name);
 ```
 
 - `$id` - ID of the product, must be unique
@@ -36,7 +36,7 @@ Otherwise, it returns `null` and you can get the error message by calling `getLa
 ## Update a product 
 
 ```php
-Mailify::updateProduct(string $id, string $name);
+MailBluster::updateProduct(string $id, string $name);
 ```
 
 - `$id` - ID of the product, must be unique
@@ -48,7 +48,7 @@ Otherwise, it returns `null` and you can get the error message by calling `getLa
 ## Delete a product
 
 ```php
-Mailify::deleteProduct(string $id);
+MailBluster::deleteProduct(string $id);
 ```
 
 - `$id` - ID of the product

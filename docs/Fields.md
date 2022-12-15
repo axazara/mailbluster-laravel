@@ -4,7 +4,7 @@ To learn more about the API, visit [MailBluster API - Fields](https://app.mailbl
 ## Get all fields
 
 ```php
-Mailify::getFields();
+MailBluster::getFields();
 ```
 
 If request is successful, this method return object containing all fields in array.
@@ -13,7 +13,7 @@ Otherwise, it returns `null` and you can get the error message by calling `getLa
 ## Create a field
 
 ```php
-Mailify::createField(string $label, string $tag);
+MailBluster::createField(string $label, string $tag);
 ```
 
 - `$label` - Label of the field
@@ -25,7 +25,7 @@ Otherwise, it returns `null` and you can get the error message by calling `getLa
 ## Update a field
 
 ```php
-Mailify::updateField(string $id, string $label, string $tag);
+MailBluster::updateField(string $id, string $label, string $tag);
 ```
 
 - `$id` - ID of the field
@@ -39,7 +39,7 @@ Otherwise, it returns `null` and you can get the error message by calling `getLa
 ## Delete a field
 
 ```php
-Mailify::deleteField(string $id);
+MailBluster::deleteField(string $id);
 ```
 
 - `$id` - ID of the field

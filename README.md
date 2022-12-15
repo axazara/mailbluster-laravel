@@ -6,10 +6,10 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/axazara/mailbluster-laravel.svg?style=flat-square)](https://packagist.org/packages/axazara/mailbluster-laravel)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This is simple laravel package to interact with Mailbluster API.
+This is simple laravel package to interact with MailBluster API.
 
 ```php
-Mailify::createLead('lead@exemple.com') // To create a lead
+MailBluster::createLead('lead@exemple.com') // To create a lead
 ```
 
 ## Installation
@@ -30,8 +30,8 @@ This is the contents of the published config file:
 
 ```php
 return [
-    'api_url' => env('MAILBLUSTER_API_URL'),
-    'api_key' => env('MAILBLUSTER_API_KEY'),
+    'api_url' => env('MAILBLUSTER_API_URL', 'https://api.mailbluster.com/api'),
+    'api_key' => env('MAILBLUSTER_API_KEY', ''),
 ];
 ```
 
@@ -41,8 +41,8 @@ To use the MailBluster API, you need to set the `MAILBLUSTER_API_KEY`  environme
 ```dotenv
 MAILBLUSTER_API_KEY=MAILBLUSTER_API_KEY_HERE
 ```
-- `MAILIFY_API_URL` you can get this from your MailBluster API  doc.
-- `MAILBLUSTER_API_KEY` you can get this from your MailBluster dashboard.
+- `MAILBLUSTER_API_URL` you can get this from MailBluster API  doc.
+- `MAILBLUSTER_API_KEY` you can get this from your MailBluster account dashboard.
 
 > **IMPORTANT**
 > - Save your API key as an environment variable in your `.env` file. Do not hardcode it in your code.
@@ -63,6 +63,12 @@ Read products docs [docs](docs/Products.md)
 
 ## Contribution
 You can contribute to this package by forking the repository and submitting a pull request to the `dev-main` branch.
+
+## Local Development
+To avoid error in local development or testing environment you can set the `MAILBLUSTER_API_URL` environment variable to `test` in your `.env` file, this will prevent package to send email to MailBluster API.
+⚠️Be sure to set the `MAILBLUSTER_API_URL` environment variable to the correct value when deploying to production.
+
+
 
 ## Credits
 - [Axa Zara](https://axazara.com)
