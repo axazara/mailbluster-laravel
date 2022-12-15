@@ -6,7 +6,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/axazara/mailbluster-laravel.svg?style=flat-square)](https://packagist.org/packages/axazara/mailbluster-laravel)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This is simple laravel package to interact with Mailbluster API.
+This is simple laravel package to interact with MailBluster API.
 
 ```php
 MailBluster::createLead('lead@exemple.com') // To create a lead
@@ -30,8 +30,8 @@ This is the contents of the published config file:
 
 ```php
 return [
-    'api_url' => env('MAILBLUSTER_API_URL'),
-    'api_key' => env('MAILBLUSTER_API_KEY'),
+    'api_url' => env('MAILBLUSTER_API_URL', 'https://api.mailbluster.com/api'),
+    'api_key' => env('MAILBLUSTER_API_KEY', ''),
 ];
 ```
 
