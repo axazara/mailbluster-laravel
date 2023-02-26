@@ -25,7 +25,7 @@ trait Request
         if ($this->apiUrl === 'test') {
             Log::error('MailBluster :: You are using the test mode, no request has made to MailBluster API, please check your config file.');
 
-            $this->response = [
+            $this->response = (object) [
                 'lead' => [],
                 'products' => [],
                 'product' => [],
