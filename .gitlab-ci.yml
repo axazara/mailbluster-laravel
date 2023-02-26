@@ -1,13 +1,6 @@
 image: php:8.1.0-fpm
 
-services:
-  - mysql:latest
-
 variables:
-  MYSQL_DATABASE: laravel
-  MYSQL_ROOT_PASSWORD: root
-  DB_HOST: mysql
-  DB_USERNAME: root
   XDEBUG_MODE: coverage
 
 before_script:
@@ -38,7 +31,6 @@ composer:
     paths:
       - vendor/
 
-# This is code quality stage, it will run the code style and unused scanner
 code_quality:
   stage: Code Quality
   script:
@@ -51,7 +43,6 @@ unused_scanner:
   script:
     - vendor/bin/unused_scanner unused-scanner.php
 
-# This is test stage, it will run all tests
 unit_test:
   stage: Test
   dependencies:

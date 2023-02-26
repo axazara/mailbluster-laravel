@@ -29,7 +29,7 @@ trait Products
         $this->endpoint = '/products';
         $this->method = 'GET';
 
-        return ($this->makeRequest()) ? $this->response : null;
+        return ($this->makeRequest()) ? $this->response->products : null;
     }
 
     public function getProduct(string $id): ?object
@@ -56,6 +56,6 @@ trait Products
         $this->endpoint = '/products/'.$id;
         $this->method = 'DELETE';
 
-        return (bool) $this->makeRequest();
+        return $this->makeRequest();
     }
 }
