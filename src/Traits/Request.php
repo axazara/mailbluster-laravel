@@ -25,6 +25,15 @@ trait Request
         if ($this->apiUrl === 'test') {
             Log::error('MailBluster :: You are using the test mode, no request has made to MailBluster API, please check your config file.');
 
+            $this->response = [
+                'lead' => [],
+                'products' => [],
+                'product' => [],
+                'field' => [],
+                'fields' => [],
+                'THIS IS A TEST RESPONSE',
+            ];
+
             return true;
         }
 
@@ -50,11 +59,11 @@ trait Request
         $this->payload = (object) $payload;
 
         try {
-            $response = Http::withHeaders([
-                'Content-Type' => 'application/json',
-                'Accept' => 'application/json',
-                'Authorization' => config('mailbluster.api_key'),
-            ])->withBody(json_encode($this->payload->body, JSON_THROW_ON_ERROR), 'application/json')
+            $response = Http::asJson()
+                ->acceptJson()
+                ->withHeaders([
+                    'Authorization' => config('mailbluster.api_key'),
+                ])->withBody(json_encode($this->payload->body, JSON_THROW_ON_ERROR), 'application/json')
                 ->{$this->payload->method}($this->payload->url);
 
             $this->response = (object) $response->json();
