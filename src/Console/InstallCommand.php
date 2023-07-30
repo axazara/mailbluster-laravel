@@ -49,7 +49,7 @@ class InstallCommand extends Command
     {
         $params = [
             '--provider' => MailBlusterServiceProvider::class,
-            '--tag' => 'config',
+            '--tag'      => 'config',
         ];
 
         if ($forcePublish === true) {
@@ -61,8 +61,6 @@ class InstallCommand extends Command
 
     /**
      * Updates the environment file with the basic configuration.
-     *
-     * @return void
      */
     public function updateEnvironmentFile(): void
     {
@@ -72,7 +70,7 @@ class InstallCommand extends Command
             if (! Str::contains($contents, 'MAILBLUSTER_API_KEY=')) {
                 File::append(
                     $env,
-                    PHP_EOL.'MAILBLUSTER_API_KEY='.'test-api-key'.PHP_EOL,
+                    PHP_EOL . 'MAILBLUSTER_API_KEY=' . 'test-api-key' . PHP_EOL,
                 );
                 $this->info('Added MAILBLUSTER_API_KEY to your .env file');
                 $this->info('Please update the value with your MailBluster API key');
