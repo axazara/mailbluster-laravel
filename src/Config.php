@@ -11,10 +11,10 @@ class Config
         }
     }
 
-     public static function validateApiKey($api_key): void
-     {
-         if (empty($api_key)) {
-             throw new \AxaZara\MailBluster\Exceptions\ApiKeyIsMissing();
-         }
-     }
+    public static function validateApiKey($api_key): void
+    {
+        if (empty($api_key)) {
+            throw new \AxaZara\MailBluster\Exceptions\ApiKeyIsMissing();
+        }
+    }
 }

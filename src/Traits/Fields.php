@@ -17,38 +17,38 @@ trait Fields
         $this->endpoint = '/fields';
         $this->method = 'POST';
         $this->body = [
-            'fieldLabel' => $label,
+            'fieldLabel'    => $label,
             'fieldMergeTag' => $tag,
         ];
 
         return ($this->makeRequest()) ? (object) $this->response->field : null;
     }
 
-     public function getFields(): ?object
-     {
-         $this->endpoint = '/fields';
-         $this->method = 'GET';
+    public function getFields(): ?object
+    {
+        $this->endpoint = '/fields';
+        $this->method = 'GET';
 
-         return ($this->makeRequest()) ? (object) $this->response->fields : null;
-     }
+        return ($this->makeRequest()) ? (object) $this->response->fields : null;
+    }
 
-     public function updateField(string $id, string $label, string $tag): ?object
-     {
-         $this->endpoint = '/fields/'.$id;
-         $this->method = 'PUT';
-         $this->body = [
-             'fieldLabel' => $label,
-             'fieldMergeTag' => $tag,
-         ];
+    public function updateField(string $id, string $label, string $tag): ?object
+    {
+        $this->endpoint = '/fields/' . $id;
+        $this->method = 'PUT';
+        $this->body = [
+            'fieldLabel'    => $label,
+            'fieldMergeTag' => $tag,
+        ];
 
-         return ($this->makeRequest()) ? (object) $this->response->field : null;
-     }
+        return ($this->makeRequest()) ? (object) $this->response->field : null;
+    }
 
-     public function deleteField(string $id): bool
-     {
-         $this->endpoint = '/fields/'.$id;
-         $this->method = 'DELETE';
+    public function deleteField(string $id): bool
+    {
+        $this->endpoint = '/fields/' . $id;
+        $this->method = 'DELETE';
 
-         return $this->makeRequest();
-     }
+        return $this->makeRequest();
+    }
 }

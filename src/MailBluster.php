@@ -5,8 +5,11 @@ namespace AxaZara\MailBluster;
 class MailBluster
 {
     use Traits\Request;
+
     use Traits\Leads;
+
     use Traits\Fields;
+
     use Traits\Products;
 
     private object $payload;

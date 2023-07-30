@@ -26,11 +26,11 @@ trait Request
             Log::error('MailBluster :: You are using the test mode, no request has made to MailBluster API, please check your config file.');
 
             $this->response = (object) [
-                'lead' => [],
+                'lead'     => [],
                 'products' => [],
-                'product' => [],
-                'field' => [],
-                'fields' => [],
+                'product'  => [],
+                'field'    => [],
+                'fields'   => [],
                 'THIS IS A TEST RESPONSE',
             ];
 
@@ -41,8 +41,8 @@ trait Request
 
         $payload = [
             'method' => $this->method,
-            'body' => $this->body,
-            'url' => $this->apiUrl.$this->endpoint,
+            'body'   => $this->body,
+            'url'    => $this->apiUrl . $this->endpoint,
         ];
 
         return $this->dispatch($payload);
@@ -70,14 +70,14 @@ trait Request
 
             if ($response->failed()) {
                 $this->lastError = $response->body() ?? 'Unknown error';
-                Log::error('MailBluster Error :: '.$this->lastError.' URL :: '.$this->payload->url.' Request Body :: '.json_encode($this->payload->body, JSON_THROW_ON_ERROR));
+                Log::error('MailBluster Error :: ' . $this->lastError . ' URL :: ' . $this->payload->url . ' Request Body :: ' . json_encode($this->payload->body, JSON_THROW_ON_ERROR));
 
                 return false;
             }
 
             return true;
         } catch (Exception $e) {
-            Log::error('MailBluster :: Exception :'.$e->getMessage());
+            Log::error('MailBluster :: Exception :' . $e->getMessage());
             throw new RequestError($e->getMessage());
         }
     }

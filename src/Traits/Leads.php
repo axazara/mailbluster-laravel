@@ -16,12 +16,8 @@ trait Leads
 
     /**
      * Create new lead
-     * $Fiels is array contain new leads infos
+     * $Fiels is array contain new leads infos.
      *
-     * @param  string  $email
-     * @param  bool  $subscribed
-     * @param  array  $options
-     * @return object|null
      *
      * @see https://app.mailbluster.com/api-doc/leads
      */
@@ -32,7 +28,7 @@ trait Leads
         }
 
         $this->body = array_merge($options, [
-            'email' => $email,
+            'email'      => $email,
             'subscribed' => $subscribed,
         ]);
         $this->method = 'POST';
@@ -42,10 +38,8 @@ trait Leads
     }
 
     /**
-     * View specific lead
+     * View specific lead.
      *
-     * @param  string  $email
-     * @return object|null
      *
      * @see https://app.mailbluster.com/api-doc/leads/read
      */
@@ -56,17 +50,14 @@ trait Leads
         }
 
         $this->method = 'GET';
-        $this->endpoint = '/leads/'.md5($email);
+        $this->endpoint = '/leads/' . md5($email);
 
         return ($this->makeRequest()) ? (object) $this->response : null;
     }
 
     /**
-     * Update lead
+     * Update lead.
      *
-     * @param  string  $email
-     * @param  array  $fields
-     * @return object|null
      *
      * @see https://app.mailbluster.com/api-doc/leads/update
      */
@@ -77,23 +68,21 @@ trait Leads
         }
         $this->body = $fields;
         $this->method = 'PUT';
-        $this->endpoint = '/leads/'.md5($email);
+        $this->endpoint = '/leads/' . md5($email);
 
         return ($this->makeRequest()) ? (object) $this->response->lead : null;
     }
 
     /**
-     * Delete lead
+     * Delete lead.
      *
-     * @param  string  $leadEmail
-     * @return bool
      *
      * @see https://app.mailbluster.com/api-doc/leads/delete
      */
     public function deleteLead(string $leadEmail): bool
     {
         $this->method = 'DELETE';
-        $this->endpoint = '/leads/'.md5($leadEmail);
+        $this->endpoint = '/leads/' . md5($leadEmail);
 
         return $this->makeRequest();
     }

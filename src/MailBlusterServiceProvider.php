@@ -20,7 +20,7 @@ class MailBlusterServiceProvider extends ServiceProvider
                 Console\InstallCommand::class,
             ]);
             $this->publishes([
-                __DIR__.'/../config/mailbluster-laravel.php' => config_path('mailbluster.php'),
+                __DIR__ . '/../config/mailbluster-laravel.php' => config_path('mailbluster.php'),
             ], 'config');
         }
 

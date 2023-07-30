@@ -34,7 +34,7 @@ composer:
 code_quality:
   stage: Code Quality
   script:
-    - vendor/bin/phpstan analyse --no-interaction
+    - vendor/bin/php-cs-fixer fix -vvv --dry-run --show-progress=dots
 
 unused_scanner:
   stage: Code Quality

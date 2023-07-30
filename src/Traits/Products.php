@@ -17,7 +17,7 @@ trait Products
         $this->endpoint = '/products';
         $this->method = 'POST';
         $this->body = [
-            'id' => $id,
+            'id'   => $id,
             'name' => $name,
         ];
 
@@ -34,7 +34,7 @@ trait Products
 
     public function getProduct(string $id): ?object
     {
-        $this->endpoint = '/products/'.$id;
+        $this->endpoint = '/products/' . $id;
         $this->method = 'GET';
 
         return ($this->makeRequest()) ? $this->response->product : null;
@@ -42,7 +42,7 @@ trait Products
 
     public function updateProduct(string $id, string $name): ?object
     {
-        $this->endpoint = '/products/'.$id;
+        $this->endpoint = '/products/' . $id;
         $this->method = 'PUT';
         $this->body = [
             'name' => $name,
@@ -53,7 +53,7 @@ trait Products
 
     public function deleteProduct(string $id): bool
     {
-        $this->endpoint = '/products/'.$id;
+        $this->endpoint = '/products/' . $id;
         $this->method = 'DELETE';
 
         return $this->makeRequest();
