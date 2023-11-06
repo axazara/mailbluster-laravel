@@ -21,13 +21,13 @@ trait Leads
      *
      * @see https://app.mailbluster.com/api-doc/leads
      */
-    public function createLead(string $email, bool $subscribed = true, array $options = []): ?object
+    public function createLead(string $email, bool $subscribed = true, array $fields = []): ?object
     {
         if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new \AxaZara\MailBluster\Exceptions\InvalidEmail();
         }
 
-        $this->body = array_merge($options, [
+        $this->body = array_merge($fields, [
             'email'      => $email,
             'subscribed' => $subscribed,
         ]);
