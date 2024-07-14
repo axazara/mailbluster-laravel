@@ -1,22 +1,22 @@
-image: php:8.1.0-fpm
+image: php:${PHP_VERSION}-fpm
 
 variables:
   XDEBUG_MODE: coverage
-
-before_script:
-  - apt-get -qq update
-  - apt-get -qq install zip unzip -y
-  - apt-get -qq install git libicu-dev libpq-dev libzip-dev libsqlite3-dev zlib1g-dev -y
-  - docker-php-ext-install sockets pgsql pdo_pgsql pdo_mysql > /dev/null
-  - pecl install xdebug && docker-php-ext-enable xdebug
-  - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-  - php composer-setup.php --install-dir=/usr/local/bin --filename=composer
-  - composer require --dev phpunit/phpunit phpunit/php-code-coverage
+  PHP_VERSION: 8.1 # Default PHP version
 
 stages:
   - Build
   - Code Quality
   - Test
+
+before_script:
+  - apt-get -qq update
+  - apt-get -qq install zip unzip git libicu-dev libpq-dev libzip-dev libsqlite3-dev zlib1g-dev -y
+  - docker-php-ext-install sockets pgsql pdo_pgsql pdo_mysql > /dev/null
+  - pecl install xdebug && docker-php-ext-enable xdebug
+  - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+  - php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+  - composer require --dev phpunit/phpunit phpunit/php-code-coverage
 
 composer:
   stage: Build
@@ -45,8 +45,8 @@ unused_scanner:
 
 unit_test:
   stage: Test
-  dependencies:
-    - composer
+  variables:
+    PHP_VERSION: ${MATRIX_PHP_VERSION}
   script:
     - vendor/bin/phpunit
   artifacts:
@@ -56,3 +56,6 @@ unit_test:
       coverage_report:
         coverage_format: cobertura
         path: build/logs/clover.xml
+  parallel:
+    matrix:
+      - MATRIX_PHP_VERSION: ["8.1", "8.2", "8.3"]
