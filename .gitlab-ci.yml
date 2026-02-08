@@ -4,7 +4,6 @@ stages:
   - Build
   - Code Quality
   - Test
-  - Release
 
 # Build Stage - Install dependencies and cache them
 composer:
@@ -68,19 +67,3 @@ test:
   script:
     - vendor/bin/phpunit --testdox
   allow_failure: false
-
-# Release Stage - Create GitLab release when tag is pushed
-release:
-  stage: Release
-  image: registry.gitlab.com/gitlab-org/release-cli:latest
-  rules:
-    - if: $CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/
-  script:
-    - echo "Creating release for $CI_COMMIT_TAG"
-  release:
-    tag_name: $CI_COMMIT_TAG
-    name: "Release $CI_COMMIT_TAG"
-    description: |
-      ## Release $CI_COMMIT_TAG
-
-      See [CHANGELOG.md](CHANGELOG.md) for details.
