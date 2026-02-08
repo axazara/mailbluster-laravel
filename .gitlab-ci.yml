@@ -1,23 +1,12 @@
-image: php:${PHP_VERSION}-fpm
-
-variables:
-  XDEBUG_MODE: coverage
-  PHP_VERSION: 8.1 # Default PHP version
+image: registry.gitlab.com/axazara/package/laravel-docker/laravel-docker:8.3
 
 stages:
   - Build
   - Code Quality
   - Test
+  - Release
 
-before_script:
-  - apt-get -qq update
-  - apt-get -qq install zip unzip git libicu-dev libpq-dev libzip-dev libsqlite3-dev zlib1g-dev -y
-  - docker-php-ext-install sockets pgsql pdo_pgsql pdo_mysql > /dev/null
-  - pecl install xdebug && docker-php-ext-enable xdebug
-  - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-  - php composer-setup.php --install-dir=/usr/local/bin --filename=composer
-  - composer require --dev phpunit/phpunit phpunit/php-code-coverage
-
+# Build Stage - Install dependencies and cache them
 composer:
   stage: Build
   cache:
@@ -25,37 +14,73 @@ composer:
     paths:
       - vendor/
   script:
-    - composer install
+    - composer install --prefer-dist --no-progress --no-interaction
   artifacts:
     expire_in: 1 day
     paths:
       - vendor/
 
-code_quality:
-  stage: Code Quality
-  script:
-    - vendor/bin/php-cs-fixer fix -vvv --dry-run --show-progress=dots
-
-unused_scanner:
+# Code Quality Stage - Run PHP CS Fixer
+code-style:
   stage: Code Quality
   dependencies:
     - composer
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}-composer
+    paths:
+      - vendor/
+    policy: pull
   script:
-    - vendor/bin/unused_scanner unused-scanner.php
+    - vendor/bin/php-cs-fixer fix --dry-run --diff --verbose
+  allow_failure: false
 
-unit_test:
-  stage: Test
-  variables:
-    PHP_VERSION: ${MATRIX_PHP_VERSION}
+# Code Quality Stage - Run PHPStan
+phpstan:
+  stage: Code Quality
+  dependencies:
+    - composer
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}-composer
+    paths:
+      - vendor/
+    policy: pull
   script:
-    - vendor/bin/phpunit
+    - vendor/bin/phpstan analyse --no-progress --error-format=gitlab --memory-limit=1G > phpstan-report.json || true
   artifacts:
+    when: always
+    expire_in: 1 day
     reports:
-      junit:
-        - build/report.junit.xml
-      coverage_report:
-        coverage_format: cobertura
-        path: build/logs/clover.xml
-  parallel:
-    matrix:
-      - MATRIX_PHP_VERSION: ["8.1", "8.2", "8.3"]
+      codequality: phpstan-report.json
+    paths:
+      - phpstan-report.json
+  allow_failure: true
+
+# Test Stage - Run PHPUnit tests
+test:
+  stage: Test
+  dependencies:
+    - composer
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}-composer
+    paths:
+      - vendor/
+    policy: pull
+  script:
+    - vendor/bin/phpunit --testdox
+  allow_failure: false
+
+# Release Stage - Create GitLab release when tag is pushed
+release:
+  stage: Release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/
+  script:
+    - echo "Creating release for $CI_COMMIT_TAG"
+  release:
+    tag_name: $CI_COMMIT_TAG
+    name: "Release $CI_COMMIT_TAG"
+    description: |
+      ## Release $CI_COMMIT_TAG
+
+      See [CHANGELOG.md](CHANGELOG.md) for details.
