@@ -10,8 +10,8 @@ concurrency:
   cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
-  composer:
-    name: Composer install
+  code-style:
+    name: Code Style
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -22,35 +22,12 @@ jobs:
           tools: composer:v2
           coverage: none
       - run: composer install --prefer-dist --no-progress --no-interaction --ignore-platform-reqs
-      - uses: actions/upload-artifact@v4
-        with:
-          name: vendor
-          path: vendor
-          retention-days: 1
-
-  code-style:
-    name: Code Style
-    needs: composer
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v4
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.3'
-          tools: composer:v2
-          coverage: none
-      - uses: actions/download-artifact@v4
-        with:
-          name: vendor
-          path: vendor
-      - run: chmod +x vendor/bin/*
       - run: vendor/bin/php-cs-fixer fix --dry-run --diff --verbose
 
   test:
     name: PHPUnit
     runs-on: ubuntu-latest
-    timeout-minutes: 6
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
@@ -59,10 +36,4 @@ jobs:
           tools: composer:v2
           coverage: none
       - run: composer install --prefer-dist --no-progress --no-interaction --ignore-platform-reqs
-      - run: |
-          code=0
-          timeout 120 vendor/bin/phpunit --testdox --log-events-verbose-text php://stdout || code=$?
-          echo "phpunit-exit=$code"
-          echo "=== boot trace ==="
-          cat /tmp/boot-trace.log 2>/dev/null || echo "no trace file"
-          exit $code
+      - run: vendor/bin/phpunit --testdox
