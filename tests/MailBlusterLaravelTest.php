@@ -9,8 +9,11 @@ class MailBlusterLaravelTest extends TestCase
 {
     public function setUp(): void
     {
+        @file_put_contents('/tmp/boot-trace.log', "0:setUp-before-parent\n", FILE_APPEND);
         parent::setUp();
+        @file_put_contents('/tmp/boot-trace.log', "4:setUp-after-parent\n", FILE_APPEND);
         Bus::fake();
+        @file_put_contents('/tmp/boot-trace.log', "5:setUp-after-busfake\n", FILE_APPEND);
     }
 
     /** @test */

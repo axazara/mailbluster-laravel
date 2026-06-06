@@ -51,7 +51,7 @@ jobs:
     name: PHPUnit
     needs: composer
     runs-on: ubuntu-latest
-    timeout-minutes: 6
+    timeout-minutes: 3
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
@@ -65,3 +65,5 @@ jobs:
           path: vendor
       - run: chmod +x vendor/bin/*
       - run: vendor/bin/phpunit --testdox --log-events-verbose-text php://stdout
+      - if: always()
+        run: echo "=== boot trace ===" && cat /tmp/boot-trace.log || echo "no trace file"
