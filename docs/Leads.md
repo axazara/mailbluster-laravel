@@ -99,7 +99,7 @@ if ($lead) {
 
 ## Credits
 - [Axa Zara](https://axazara.com)
-- [Elias Elimah](https://gitlab.com/EliasElimah)
+- [Elias Elimah](https://github.com/EliasElimah)
 
 ## Copyright
 [MailBluster](https://mailbluster.com) is not affiliated with [Axa Zara](https://axazara.com).

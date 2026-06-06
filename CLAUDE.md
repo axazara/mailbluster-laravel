@@ -60,7 +60,7 @@ The package follows a trait-composition pattern — the core `MailBluster` class
 - Static analysis via PHPStan at level 4; baseline tracked in `phpstan-baseline.neon`
 - All API responses are cast to `object` (not typed DTOs); null is returned on failed requests, `getLastError()` retrieves the last HTTP error body
 - Never hardcode `MAILBLUSTER_API_KEY` — always read from environment via config
-- Contributions target the `dev-main` branch via pull request
+- Contributions target the `main` branch via pull request
 
 ## Git Conventions
 
