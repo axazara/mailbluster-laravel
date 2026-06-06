@@ -10,9 +10,10 @@ concurrency:
   cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
-  composer:
-    name: Composer install
+  code-style:
+    name: Code Style
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
@@ -21,34 +22,12 @@ jobs:
           tools: composer:v2
           coverage: none
       - run: composer install --prefer-dist --no-progress --no-interaction --ignore-platform-reqs
-      - uses: actions/upload-artifact@v4
-        with:
-          name: vendor
-          path: vendor
-          retention-days: 1
-
-  code-style:
-    name: Code Style
-    needs: composer
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.3'
-          tools: composer:v2
-          coverage: none
-      - uses: actions/download-artifact@v4
-        with:
-          name: vendor
-          path: vendor
-      - run: chmod +x vendor/bin/*
       - run: vendor/bin/php-cs-fixer fix --dry-run --diff --verbose
 
   test:
     name: PHPUnit
-    needs: composer
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
@@ -56,9 +35,5 @@ jobs:
           php-version: '8.3'
           tools: composer:v2
           coverage: none
-      - uses: actions/download-artifact@v4
-        with:
-          name: vendor
-          path: vendor
-      - run: chmod +x vendor/bin/*
-      - run: vendor/bin/phpunit --testdox || vendor/bin/phpunit
+      - run: composer install --prefer-dist --no-progress --no-interaction --ignore-platform-reqs
+      - run: vendor/bin/phpunit --testdox

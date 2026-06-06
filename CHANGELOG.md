@@ -5,6 +5,16 @@ All notable changes to `mailbluster-laravel` will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org). Version
 headings match the Git tags published on GitHub and Packagist.
 
+## Unreleased
+
+### Fixed
+- Resolve the dev dependency conflict that broke CI (`larastan` `^3.0`, `phpstan-phpunit`/`phpstan-deprecation-rules` `^2.0`)
+- Stop sharing the `vendor` directory as a CI artifact between jobs; each job installs its own dependencies (the artifact transfer broke the Testbench skeleton and hung the test boot)
+
+### Changed
+- Replace remaining GitLab references (CI config, README badges, author links, issue template) with GitHub equivalents
+- Add per-job timeouts to the CI workflow
+
 ## v2.0.1 - 2026-06-06
 
 ### Changed

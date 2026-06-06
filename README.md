@@ -1,7 +1,6 @@
 # MailBluster Laravel Package
 
-[![Pipeline Status](https://gitlab.com/axazara/package/mailbluster-laravel/badges/main/pipeline.svg)](https://gitlab.com/axazara/package/mailbluster-laravel)
-[![Coverage](https://gitlab.com/axazara/package/mailbluster-laravel/badges/main/coverage.svg)](https://gitlab.com/axazara/package/mailbluster-laravel)
+[![CI](https://github.com/axazara/mailbluster-laravel/actions/workflows/ci.yml/badge.svg)](https://github.com/axazara/mailbluster-laravel/actions/workflows/ci.yml)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/axazara/mailbluster-laravel.svg?style=flat-square)](https://packagist.org/packages/axazara/mailbluster-laravel)
 [![Total Downloads](https://img.shields.io/packagist/dt/axazara/mailbluster-laravel.svg?style=flat-square)](https://packagist.org/packages/axazara/mailbluster-laravel)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -62,7 +61,7 @@ Read fields docs [docs](docs/Fields.md)
 Read products docs [docs](docs/Products.md)
 
 ## Contribution
-You can contribute to this package by forking the repository and submitting a pull request to the `dev-main` branch.
+You can contribute to this package by forking the repository and submitting a pull request to the `main` branch.
 
 ## Local Development
 To avoid error in local development or testing environment you can set the `MAILBLUSTER_API_URL` environment variable to `test` in your `.env` file, this will prevent package to send email to MailBluster API.
@@ -72,7 +71,7 @@ To avoid error in local development or testing environment you can set the `MAIL
 
 ## Credits
 - [Axa Zara](https://axazara.com)
-- [Elias Elimah](https://gitlab.com/EliasElimah)
+- [Elias Elimah](https://github.com/EliasElimah)
 
 ## Copyright
 [MailBluster](https://mailbluster.com) is not affiliated with [Axa Zara](https://axazara.com).
