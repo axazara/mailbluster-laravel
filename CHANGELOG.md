@@ -5,7 +5,7 @@ All notable changes to `mailbluster-laravel` will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org). Version
 headings match the Git tags published on GitHub and Packagist.
 
-## Unreleased
+## v2.0.2 - 2026-06-06
 
 ### Fixed
 - Resolve the dev dependency conflict that broke CI (`larastan` `^3.0`, `phpstan-phpunit`/`phpstan-deprecation-rules` `^2.0`)
