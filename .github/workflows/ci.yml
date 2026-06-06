@@ -65,7 +65,9 @@ jobs:
           path: vendor
       - run: chmod +x vendor/bin/*
       - run: |
-          timeout 90 vendor/bin/phpunit --testdox --log-events-verbose-text php://stdout; code=$?
+          code=0
+          timeout 90 vendor/bin/phpunit --testdox --log-events-verbose-text php://stdout || code=$?
           echo "phpunit-exit=$code"
-          echo "=== boot trace ==="; cat /tmp/boot-trace.log 2>/dev/null || echo "no trace file"
+          echo "=== boot trace ==="
+          cat /tmp/boot-trace.log 2>/dev/null || echo "no trace file"
           exit $code
