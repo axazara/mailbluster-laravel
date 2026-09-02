@@ -25,9 +25,17 @@ jobs:
       - run: vendor/bin/php-cs-fixer fix --dry-run --diff --verbose
 
   test:
-    name: PHPUnit
+    name: PHPUnit (Laravel ${{ matrix.laravel }})
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - laravel: '12'
+            testbench: '10'
+          - laravel: '13'
+            testbench: '11'
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
@@ -35,5 +43,5 @@ jobs:
           php-version: '8.3'
           tools: composer:v2
           coverage: none
-      - run: composer install --prefer-dist --no-progress --no-interaction --ignore-platform-reqs
+      - run: composer update --prefer-dist --no-progress --no-interaction --with "laravel/framework:^${{ matrix.laravel }}.0" --with "orchestra/testbench:^${{ matrix.testbench }}.0"
       - run: vendor/bin/phpunit --testdox
