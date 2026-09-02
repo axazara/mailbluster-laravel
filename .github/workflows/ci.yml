@@ -21,7 +21,7 @@ jobs:
           php-version: '8.3'
           tools: composer:v2
           coverage: none
-      - run: composer install --prefer-dist --no-progress --no-interaction --ignore-platform-reqs
+      - run: composer install --prefer-dist --no-progress --no-interaction
       - run: vendor/bin/php-cs-fixer fix --dry-run --diff --verbose
 
   test:
