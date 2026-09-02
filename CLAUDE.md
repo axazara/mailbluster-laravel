@@ -4,13 +4,13 @@ Guidance for Claude Code and other AI agents working in this repository.
 
 ## Project overview
 
-`axazara/mailbluster-laravel` is a Laravel package (published on Packagist) that provides a fluent facade-based client for the MailBluster email marketing API. It auto-registers via Laravel's package discovery and exposes CRUD operations for Leads, custom Fields, and Products. Consuming Laravel apps require PHP 8.2+ and Laravel 10, 11 or 12.
+`axazara/mailbluster-laravel` is a Laravel package (published on Packagist) that provides a fluent facade-based client for the MailBluster email marketing API. It auto-registers via Laravel's package discovery and exposes CRUD operations for Leads, custom Fields, and Products. Consuming Laravel apps require PHP 8.2+ and Laravel 10, 11, 12 or 13.
 
 ## Tech stack
 
 - PHP ^8.2
-- Laravel (illuminate/contracts ^10.0 || ^11.0 || ^12.0) — no full Laravel app, package only
-- Orchestra Testbench ^8.0 || ^9.0 || ^10.0 (test harness)
+- Laravel (illuminate/contracts ^10.0 || ^11.0 || ^12.0 || ^13.0) — no full Laravel app, package only
+- Orchestra Testbench ^8.0 || ^9.0 || ^10.0 || ^11.0 (test harness)
 - PHPUnit ^10.5 || ^11.0 (test runner)
 - Larastan/PHPStan ^2.4 || ^3.0 (static analysis, level 4)
 - axazara/php-cs ^0.3 (code style, wraps php-cs-fixer)
