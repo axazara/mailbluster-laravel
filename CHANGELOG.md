@@ -5,6 +5,15 @@ All notable changes to `mailbluster-laravel` will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org). Version
 headings match the Git tags published on GitHub and Packagist.
 
+## v2.1.0 - 2026-09-24
+
+### Added
+- Laravel 13 support (`illuminate/contracts` `^13.0`)
+
+### Changed
+- Allow `orchestra/testbench` `^11.0` and `phpunit/phpunit` `^12.0` for development
+- CI installs dependencies without ignoring platform requirements
+
 ## v2.0.2 - 2026-06-06
 
 ### Fixed
